@@ -1,5 +1,6 @@
 ﻿using APIProduto.Core.Domain.Produto;
 using APIProduto.Core.Interface.Produto;
+using System;
 
 namespace APIProduto.Repository.Models
 {
@@ -10,6 +11,7 @@ namespace APIProduto.Repository.Models
         public string Descricao { get; set; }
         public decimal Preco { get; set; }
         public bool Ativo { get; set; }
+        public DateTime DataCriacao { get; set; }
 
         public ProtudoDao() { }
 
@@ -20,8 +22,9 @@ namespace APIProduto.Repository.Models
             Descricao = produto.Descricao;
             Preco = produto.Preco;
             Ativo = produto.Ativo;
+            DataCriacao = produto.DataCriacao;
         }
 
-        public IProduto Export() => new Produto(Id, Nome, Descricao, Preco, Ativo);
+        public IProduto Export() => new Produto(Id, Nome, Descricao, Preco, Ativo, DataCriacao);
     }
 }

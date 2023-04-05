@@ -1,4 +1,6 @@
-﻿namespace APIProduto.Core.Interface.Produto
+﻿using System;
+
+namespace APIProduto.Core.Interface.Produto
 {
     public interface IProduto
     {
@@ -7,5 +9,6 @@
         string Descricao { get; }
         decimal Preco { get; }
         bool Ativo { get; }
+        DateTime DataCriacao { get; }
     }
 }

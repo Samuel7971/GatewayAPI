@@ -1,5 +1,6 @@
 ﻿using APIProduto.Core.Domain.Produto;
 using APIProduto.Core.Interface.Produto;
+using System;
 using System.Text.Json.Serialization;
 
 namespace APIProduto.Controllers.Models
@@ -11,7 +12,8 @@ namespace APIProduto.Controllers.Models
         public string Descricao { get; set; }
         public decimal Preco { get; set; }
         public bool Ativo { get; set; }
+        public DateTime DataCriacao { get; }
 
-        public IProduto ToProduto() => new Produto(Id, Nome, Descricao, Preco, Ativo);
+        public IProduto ToProduto() => new Produto(Id, Nome, Descricao, Preco, Ativo, DataCriacao);
     }
 }

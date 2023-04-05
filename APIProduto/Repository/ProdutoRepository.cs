@@ -20,7 +20,7 @@ namespace APIProduto.Repository
         {
             using (var conn = new SqlConnection(_dataBaseSettings.ConnectionStringEstudo))
             {
-                var sql = $"SELECT Id, Nome, Descricao, Preco, Ativo FROM Estudo..Produto WHERE Id = @id";
+                var sql = $"SELECT Id, Nome, Descricao, Preco, Ativo, DataCriacao FROM Estudo..Produto WHERE Id = @id";
                 var result = await conn.QuerySingleOrDefaultAsync<ProtudoDao>(sql, new { id });
                 return result?.Export();
             }
