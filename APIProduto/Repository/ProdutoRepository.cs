@@ -3,6 +3,7 @@ using APIProduto.Repository.Interface;
 using APIProduto.Repository.Models;
 using Dapper;
 using Microsoft.Extensions.Options;
+using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace APIProduto.Repository
         {
             _dataBaseSettings = options.Value;
         }
+
         public async Task<IProduto> BuscarPorIdAsync(int id)
         {
             using (var conn = new SqlConnection(_dataBaseSettings.ConnectionStringEstudo))
@@ -23,6 +25,17 @@ namespace APIProduto.Repository
                 var sql = $"SELECT Id, Nome, Descricao, Preco, Ativo, DataCriacao FROM Estudo..Produto WHERE Id = @id";
                 var result = await conn.QuerySingleOrDefaultAsync<ProtudoDao>(sql, new { id });
                 return result?.Export();
+            }
+        }
+
+        public async Task<int> InserirAsync(IProduto produto)
+        {
+            using (var conn = new SqlConnection(_dataBaseSettings.ConnectionStringEstudo))
+            {
+                var query = $@"INSERT INTO Estudo..Produto(Nome, Descricao, Preco, Ativo, DataCriacao)
+                               VALUES(@nome, @descricao, @preco, @ativo, @dataCriacao)
+                               SELECT @@IDENTITY ";
+                return await conn.QueryFirstAsync<int>(query, produto);
             }
         }
 

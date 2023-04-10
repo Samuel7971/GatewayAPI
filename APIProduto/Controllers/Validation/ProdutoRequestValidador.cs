@@ -7,7 +7,6 @@ namespace APIProduto.Controllers.Validation
     {
         public ProdutoRequestValidador()
         {
-            RuleFor(x => x.Id).NotNull().NotEmpty().WithMessage("Id é requerido.") ;
             RuleFor(x => x.Nome)
                 .NotEmpty().NotNull().WithMessage("O Nome do Produto é requerido.")
                 .MinimumLength(5).WithMessage("Minimo de 5 caracteres para Nome.")
@@ -17,11 +16,5 @@ namespace APIProduto.Controllers.Validation
                 .MinimumLength(5).WithMessage("Minimo de 5 caracteres para descrição do produto.")
                 .MaximumLength(100).WithMessage("Máximo de 100 caracteres para descrição do produto.");
         }
-
-        //public static DifferentFromZero(AtualizarProdutoRequest atualizarProdutoRequest)
-        //{
-        //    if (atualizarProdutoRequest.Id == 0)
-        //     return 
-        //}
     }
 }

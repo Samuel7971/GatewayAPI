@@ -12,11 +12,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO;
+using System;
+using System.Reflection;
 
 namespace APIProduto
 {
     public class Startup
     {
+        private static string GetPathOfXmlFromAssembly() => Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +36,7 @@ namespace APIProduto
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIProduto", Version = "v1" });
+                c.IncludeXmlComments(GetPathOfXmlFromAssembly());
             });
 
             services.AddTransient<IValidator<AtualizarProdutoRequest>, ProdutoRequestValidador>();

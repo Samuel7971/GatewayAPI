@@ -15,6 +15,8 @@ namespace APIProduto.Services
 
         public async Task<IProduto> BuscarPorIdAsync(int id) => await _produtoRepository.BuscarPorIdAsync(id);
 
+        public async Task<int> InserirAsync(IProduto produto) => await _produtoRepository.InserirAsync(produto);
+
         public async Task<int> AtualizaAsync(IProduto produto) => await _produtoRepository.AtualizaAsync(produto);
 
         public async Task<int> AtualizarStatus(int id, bool status) => await _produtoRepository.AtualizarStatus(id, status);

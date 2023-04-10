@@ -5,14 +5,15 @@ using System.Text.Json.Serialization;
 
 namespace APIProduto.Controllers.Models
 {
-    public class AtualizarProdutoRequest
+    public class InserirProdutoRequest 
     {
-        public int Id { get; set; }
+        [JsonIgnore] public int Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal Preco { get; set; }
         public bool Ativo { get; set; }
+        public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
 
-        public IProduto ToProduto() => new Produto(Id, Nome, Descricao, Preco, Ativo);
+        public IProduto ToProduto() => new Produto(Id, Nome, Descricao, Preco, Ativo, DataCriacao);
     }
 }
