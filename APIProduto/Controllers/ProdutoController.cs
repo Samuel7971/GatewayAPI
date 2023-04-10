@@ -105,5 +105,12 @@ namespace APIProduto.Controllers
             var response = await produtoService.AtualizarStatus(id, status);
             return response > 0 ? ResponseOk("Status Produto atualizado com sucesso!") : ResponseNotFound("Erro ao atualizar status.");
         }
+
+        [HttpDelete("Deletar/{id}")]
+        public async Task<IActionResult> DeletarPorId(int id, [FromServices] IProdutoService produtoService)
+        {
+            var retorno = await produtoService.DeletarPorId(id);
+            return retorno > 0 ? ResponseOk("Produto excluído com sucesso!") : ResponseNotFound("Erro ao excluído status.");
+        }
     }
 }

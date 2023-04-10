@@ -9,5 +9,6 @@ namespace APIProduto.Services.Interface
         Task<int> InserirAsync(IProduto produto);
         Task<int> AtualizaAsync(IProduto produto);
         Task<int> AtualizarStatus(int id, bool status);
+        Task<int> DeletarPorId(int id);
     }
 }

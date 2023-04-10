@@ -63,5 +63,15 @@ namespace APIProduto.Repository
                 return affectedRows;
             }
         }
+
+        public async Task<int> DeletarPorId(int id)
+        {
+            using (var conn = new SqlConnection(_dataBaseSettings.ConnectionStringEstudo))
+            {
+                var query = $"DELETE FROM Estudo..Produto WHERE Id = @id";
+                var affectedRows = await conn.ExecuteAsync(query, new { id });
+                return affectedRows;
+            }
+        }
     }
 }

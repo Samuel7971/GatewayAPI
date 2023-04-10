@@ -20,5 +20,7 @@ namespace APIProduto.Services
         public async Task<int> AtualizaAsync(IProduto produto) => await _produtoRepository.AtualizaAsync(produto);
 
         public async Task<int> AtualizarStatus(int id, bool status) => await _produtoRepository.AtualizarStatus(id, status);
+
+        public async Task<int> DeletarPorId(int id) => await _produtoRepository.DeletarPorId(id);
     }
 }
