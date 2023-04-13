@@ -20,7 +20,7 @@ namespace APIProduto.Controllers
         /// <response code="200">Retorno produto</response>
         /// <response code="400">Se o Id não for informado</response>
         /// <response code="404">Se o produto não for encontrado</response>
-        [HttpGet("BuscarPorId/{id}")]
+        [HttpGet("BuscarPorId/id={id}")]
         [CustomResponse(StatusCodes.Status200OK)]
         [CustomResponse(StatusCodes.Status400BadRequest)]
         [CustomResponse(StatusCodes.Status404NotFound)]
@@ -93,7 +93,7 @@ namespace APIProduto.Controllers
         /// <response code="200">Se o status do produto for atualizado</response>
         /// <response code="400">Se o status do produto não for atualizado</response>
         /// <response code="404">Se o produto não for encontrado</response>
-        [HttpPatch("AtualizarStatus/{id}/{status}")]
+        [HttpPatch("AtualizarStatus/id={id}/status={status}")]
         [CustomResponse(StatusCodes.Status200OK)]
         [CustomResponse(StatusCodes.Status400BadRequest)]
         [CustomResponse(StatusCodes.Status404NotFound)]
@@ -106,7 +106,19 @@ namespace APIProduto.Controllers
             return response > 0 ? ResponseOk("Status Produto atualizado com sucesso!") : ResponseNotFound("Erro ao atualizar status.");
         }
 
+        /// <summary>
+        /// Deleta produto por Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="produtoService"></param>
+        /// <returns></returns>
+        /// <response code="200">Se o status do produto for atualizado</response>
+        /// <response code="400">Se o status do produto não for atualizado</response>
+        /// <response code="404">Se o produto não for encontrado</response>
         [HttpDelete("Deletar/{id}")]
+        [CustomResponse(StatusCodes.Status200OK)]
+        [CustomResponse(StatusCodes.Status400BadRequest)]
+        [CustomResponse(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeletarPorId(int id, [FromServices] IProdutoService produtoService)
         {
             var retorno = await produtoService.DeletarPorId(id);
