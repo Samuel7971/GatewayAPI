@@ -1,6 +1,8 @@
 ﻿using APIProduto.Core.Interface.Produto;
 using APIProduto.Repository.Interface;
 using APIProduto.Services.Interface;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace APIProduto.Services
@@ -13,6 +15,8 @@ namespace APIProduto.Services
             _produtoRepository = produtoRepository;
         }
 
+        public async Task<IEnumerable<IProduto>> BuscarTodos() => await _produtoRepository.BuscarTodos();
+     
         public async Task<IProduto> BuscarPorIdAsync(int id) => await _produtoRepository.BuscarPorIdAsync(id);
 
         public async Task<int> InserirAsync(IProduto produto) => await _produtoRepository.InserirAsync(produto);

@@ -4,6 +4,7 @@ using APIProduto.Repository.Models;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -16,6 +17,16 @@ namespace APIProduto.Repository
         public ProdutoRepository(IOptions<DataBaseSettings> options)
         {
             _dataBaseSettings = options.Value;
+        }
+
+        public async Task<IEnumerable<IProduto>> BuscarTodos()
+        {
+            var sql = $@"SELECT Id, Nome, Descricao, Preco, Ativo, DataCriacao FROM Estudo..Produto";
+            using (var conn = new SqlConnection(_dataBaseSettings.ConnectionStringEstudo))
+            {
+                var result = await conn.QueryAsync<ProtudoDao>(sql);
+                return result?.AsList();
+            }
         }
 
         public async Task<IProduto> BuscarPorIdAsync(int id)

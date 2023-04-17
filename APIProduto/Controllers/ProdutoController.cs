@@ -12,6 +12,24 @@ namespace APIProduto.Controllers
     public class ProdutoController : ApiController
     {
         /// <summary>
+        /// Buscar todos os produtos
+        /// </summary>
+        /// <param name="produtoService"></param>
+        /// <returns>Retorno todos os produtos</returns>
+        /// <response code="200">Retorno produto</response>
+        /// <response code="404">Retorno produto</response>
+        /// <response code="500">Retorno produto</response>
+        [HttpGet("BuscarTodos")]
+        [CustomResponse(StatusCodes.Status200OK)]
+        [CustomResponse(StatusCodes.Status404NotFound)]
+        [CustomResponse(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> BuscarTodos([FromServices] IProdutoService produtoService)
+        {
+            var response = await produtoService.BuscarTodos();
+            return ResponseOk(response);
+        }
+
+        /// <summary>
         /// Buscar Por Id
         /// </summary>
         /// <param name="id"></param>
